@@ -1,0 +1,20 @@
+[
+    {
+        "title":"Authentication Vs. Authorization",
+        "content":"There is a difference between authentication and authorization. Authentication means confirming your own identity, whereas authorization means being allowed access into the system.",
+        "date_created":"2024-02-11 18:08:09",
+        "user_id":2
+    },
+    {
+        "title":"MVC Is Important",
+        "content":"MVC allows developers to maintain a true separation of concerns, divising the code between the Model layer for their data, View layer for desing, and the Controller layer for application logic. ",
+        "date_created":"2024-02-11 18:08:09",
+        "user_id":1
+    },
+    {
+        "title":"Best 3D CAD Software",
+        "content":"There are many #D CAD software options. The best I've found so far are: Solidworks, Inventor, and Sketchup. The only free option is Sketchup, you will need to pay for the other two.",
+        "date_created":"2024-02-11 18:08:09",
+        "user_id":2
+    }
+]
