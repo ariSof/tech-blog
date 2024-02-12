@@ -59,11 +59,11 @@ router.get('/dashboard', withAuth, async (req, res) => {
     });
 
     const user = userData.get({ plain: true });
-    res.json(user)
-    // res.render('dashboard', {
-    //   ...user,
-    //   logged_in: true
-    // });
+    //res.json(user)
+    res.render('dashboard', {
+      ...user,
+      logged_in: true
+    });
   } catch (err) {
     res.status(500).json(err);
   }
