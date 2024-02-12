@@ -27,6 +27,10 @@ header, .project:not(:last-child) {
     padding-bottom: 0px;
   }
 
+  .list-group-item {
+    margin-bottom: 10px;
+  }
+
   #login-box, #signup-box {
     padding-bottom: 0px;
   }
