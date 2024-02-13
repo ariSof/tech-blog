@@ -24,9 +24,10 @@ const newPostFormHandler = async (event) => {
     // Collect values from the login form
     const title = document.querySelector('#title').value.trim();
     const content = document.querySelector('#content').value.trim();
+    //const today = new Date();
     const date_created = new Date();
   
-    if (content && title) {
+    if (content && title && date_created) {
       // Send a POST request to the API endpoint
       const response = await fetch('/api/posts', {
         method: 'POST',

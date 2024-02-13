@@ -5,7 +5,7 @@ const withAuth = require('../../utils/auth');
 // Route used to add a new post /api/posts
 router.post('/', withAuth, async (req, res) => {
   try {
-    const newProject = await Post.create({
+    const newPost = await Post.create({
       ...req.body,
       user_id: req.session.user_id,
     });

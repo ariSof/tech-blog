@@ -1,0 +1,21 @@
+<ol class="list-group">
+  {{!-- {{#each posts}} --}}
+  <li class="list-group-item d-flex justify-content-between align-items-start rounded-3 list-group-item-primary">
+    {{!-- <a href="#" class="list-group-item d-flex justify-content-between align-items-start rounded-3 list-group-item-action list-group-item-primary"> --}}
+        <div class="ms-2 me-auto">
+            <div class="fw-bold">{{this.title}}</div>
+            <div >
+                {{this.content}}
+            </div>
+            <div >
+                Created by: {{this.user.name}}
+            </div>
+        </div>
+        
+        <span class="badge bg-primary rounded-pill">{{this.date_created}}</span>
+    {{!-- </a> --}}
+  </li>
+  {{!-- {{/each}} --}}
+</ol>
+
+<script src="/js/home.js"></script>

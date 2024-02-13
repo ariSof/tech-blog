@@ -1,11 +1,19 @@
 <ol class="list-group">
   {{#each posts}}
   <li class="list-group-item d-flex justify-content-between align-items-start rounded-3 list-group-item-primary">
-    <div class="ms-2 me-auto">
-      <div class="fw-bold">{{this.title}}</div>
-      {{this.content}}
-    </div>
-    <span class="badge bg-primary rounded-pill">{{this.date_created}}</span>
+    <a href="/post/{{this.id}}" class="list-group-item d-flex justify-content-between align-items-start rounded-3 list-group-item-action list-group-item-primary">
+        {{!-- <div class="ms-2 me-auto"> --}}
+            <div class="fw-bold">{{this.title}}</div>
+            <div id="hidden-content" class="visually-hidden">
+                {{this.content}}
+            </div>
+        {{!-- </div> --}}
+        
+        <span class="badge bg-primary rounded-pill">{{this.date_created}}</span>
+    </a>
   </li>
   {{/each}}
 </ol>
+
+<script src="/js/home.js"></script>
+<script src="/js/comment.js"></script>
