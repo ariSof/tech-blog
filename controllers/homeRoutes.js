@@ -28,8 +28,7 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/post/:id', async (req, res) => {
-  console.log("In router post/:id findbyPK");
-  console.log(req.params.id);
+ 
   try {
     const postData = await Post.findByPk(req.params.id, {
       include: [
@@ -39,12 +38,13 @@ router.get('/post/:id', async (req, res) => {
         },
         {
           model: Comment,
-          attributes: ['text', 'date_created', 'user_id','post_id', ]
+          attributes: ['text', 'date_created', 'user_id','post_id','user_name' ]
         }
       ],
     });
 
     const post = postData.get({ plain: true });
+
     //res.json(post);
     res.render('comment', {
       ...post,
@@ -70,6 +70,22 @@ router.get('/dashboard', withAuth, async (req, res) => {
       ...user,
       logged_in: true
     });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//Route used to lookup Comment name by user_id
+router.get('/user/:id', async (req, res) => {
+ 
+  try {
+    const userData = await User.findByPk(req.params.id, {
+      
+    });
+
+    const user = userData.get({ plain: true });
+    res.json(user);
+   
   } catch (err) {
     res.status(500).json(err);
   }
