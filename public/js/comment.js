@@ -1,27 +1,36 @@
-// const searchData = async () => {
-//     var searchTrim = document.querySelector('#searchInput').value.trim();
-//     var searchInput =  searchTrim.toLowerCase();
+const searchData = async () => {
+    let text = document.querySelector('#text').value.trim();
+    console.log(text);
 
-//     // if there is an input
-//     if (searchInput) {
-//         // Send a GET request to the search API endpoint
-//         const responseData = await fetch(`/search/?difficulty=${searchInput}`, {
-//             method: 'GET',
-//             headers: { 'Content-Type': 'application/json' },
-//         }).then(res => {
-//             return res.json(); //resolves response promise
-//         });
+    const theURL = new URL(window.location.href );
+    let paramString = theURL.pathname.split('/');
+    let post_id = paramString[2];
 
-//         if (responseData) {
-//             console.log(responseData);
-//             // if hikes found display hikeCards
-//             displayHikeCards(responseData);
-//             document.querySelector('.hike-images').scrollIntoView();
-//         } else {
-//             // no hikes found alert
-//             alert(responseData);
-//         }
-//     }
-// };
+    // if there is an input
+    if (text) {
+        // Send a POST request to the search API endpoint
+        console.log("Before we call post on comment...");
+        console.log(post_id);
+        let user_id;
+        const responseData = await fetch(`/api/comment`, {
+            method: 'POST',
+            body: JSON.stringify({ text, post_id}),
+            headers: { 'Content-Type': 'application/json' },
+        }).then(res => {
+            return res.json(); //resolves response promise
+        });
 
-// // document.querySelector('.searchBtn').addEventListener('click', searchData);
+        if (responseData) {
+            console.log("In public js got response for page")
+            console.log(responseData);
+            location.reload();
+            //user_id = responseData.user_id;
+        } else {
+            // not found alert
+            alert(responseData);
+        }
+
+    }
+};
+
+ document.querySelector('.comment').addEventListener('click', searchData);

@@ -1,7 +1,5 @@
 <ol class="list-group">
-  {{!-- {{#each posts}} --}}
   <li class="list-group-item d-flex justify-content-between align-items-start rounded-3 list-group-item-primary">
-    {{!-- <a href="#" class="list-group-item d-flex justify-content-between align-items-start rounded-3 list-group-item-action list-group-item-primary"> --}}
         <div class="ms-2 me-auto">
             <div class="fw-bold">{{this.title}}</div>
             <div >
@@ -13,9 +11,39 @@
         </div>
         
         <span class="badge bg-primary rounded-pill">{{this.date_created}}</span>
-    {{!-- </a> --}}
   </li>
-  {{!-- {{/each}} --}}
-</ol>
 
-<script src="/js/home.js"></script>
+   {{#each this.comments}}
+  <li class="list-group-item d-flex justify-content-between align-items-start rounded-3 list-group-item-primary">
+        <div class="ms-2 me-auto">
+            
+            <div >
+                {{this.text}}
+            </div>
+            <p id="user-name">
+                Comment by: {{this.user_name}}
+            </p>
+        </div>
+        
+        <span class="badge bg-primary rounded-pill">{{this.date_created}}</span>
+  </li>
+  {{/each}}
+</ol>
+<div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Comment</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="newpost-form">
+          <div class="mb-3"> 
+            <input type="text" class="form-control" id="text">
+          </div>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn comment">Add Comment</button>
+        </form>
+      </div>
+</div>
+
+<scrip src="/js/home.js"></scrip>
+<script src="/js/comment.js"></script>
