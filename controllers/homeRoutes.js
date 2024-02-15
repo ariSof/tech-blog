@@ -17,6 +17,7 @@ router.get('/', async (req, res) => {
     // Serialize data so the template can read it
     const posts = postData.map((post) => post.get({ plain: true }));
     //res.json(posts)
+
     // Pass serialized data and session flag into template
     res.render('homepage', { 
       posts, 
@@ -27,7 +28,33 @@ router.get('/', async (req, res) => {
   }
 });
 
+//Used from dashboard page to open specific post
 router.get('/post/:id', withAuth, async (req, res) => {
+ 
+  try {
+    const postData = await Post.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['name'],
+        },
+      ],
+    });
+
+    const post = postData.get({ plain: true });
+
+    //res.json(post);
+    res.render('post', {
+      ...post,
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//Get route used from home to get to comments page for selected post
+router.get('/comments/:id', withAuth, async (req, res) => {
  
   try {
     const postData = await Post.findByPk(req.params.id, {
@@ -38,7 +65,8 @@ router.get('/post/:id', withAuth, async (req, res) => {
         },
         {
           model: Comment,
-          attributes: ['text', 'date_created', 'user_id','post_id','user_name' ]
+          attributes: ['text', 'date_created', 'user_id','post_id','user_name' ],
+          include:[{ model:User, attributes: ['name']}] //found out I can nest the includes.
         }
       ],
     });
@@ -79,9 +107,7 @@ router.get('/dashboard', withAuth, async (req, res) => {
 router.get('/user/:id', async (req, res) => {
  
   try {
-    const userData = await User.findByPk(req.params.id, {
-      
-    });
+    const userData = await User.findByPk(req.params.id);
 
     const user = userData.get({ plain: true });
     res.json(user);

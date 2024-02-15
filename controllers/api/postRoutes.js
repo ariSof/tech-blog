@@ -16,6 +16,30 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
+// Route used to update post /api/posts/:id
+router.put('/:id', withAuth, async (req, res) => {
+  try {
+    const updatedPost = await Post.update(
+      {
+        title: req.body.title,
+        content: req.body.content,
+        date_created: req.body.date_created
+      },
+      { 
+        where: {id: req.params.id}
+      },
+      {
+        user_id: req.session.user_id,
+      }
+    );
+
+    res.status(200).json(updatedPost);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+// Route used to delete a post /api/posts/:id
 router.delete('/:id', withAuth, async (req, res) => {
   try {
     const postData = await Post.destroy({
@@ -30,7 +54,13 @@ router.delete('/:id', withAuth, async (req, res) => {
       return;
     }
 
-    res.status(200).json(postData);
+    //res.status(200).json(postData);
+    if (req.session.logged_in) {
+      res.redirect('/dashboard');
+      return;
+    }
+    res.render('login');
+
   } catch (err) {
     res.status(500).json(err);
   }
