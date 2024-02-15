@@ -1,6 +1,5 @@
 const searchData = async () => {
     let text = document.querySelector('#text').value.trim();
-    console.log(text);
 
     const theURL = new URL(window.location.href );
     let paramString = theURL.pathname.split('/');
@@ -9,8 +8,6 @@ const searchData = async () => {
     // if there is an input
     if (text) {
         // Send a POST request to the search API endpoint
-        console.log("Before we call post on comment...");
-        console.log(post_id);
         let user_id;
         const responseData = await fetch(`/api/comment`, {
             method: 'POST',
@@ -21,8 +18,7 @@ const searchData = async () => {
         });
 
         if (responseData) {
-            console.log("In public js got response for page")
-            console.log(responseData);
+            
             location.reload();
             //user_id = responseData.user_id;
         } else {
