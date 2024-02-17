@@ -2,10 +2,11 @@
   {{#each posts}}
   <li class="list-group-item d-flex justify-content-between align-items-start rounded-3 list-group-item-primary">
     <a href="/comments/{{this.id}}" class="list-group-item d-flex justify-content-between align-items-start rounded-3 list-group-item-action list-group-item-primary">
-       
-        <div class="fw-bold">{{this.title}}</div>
-        <div id="hidden-content" class="visually-hidden">
-            {{this.content}}
+        <div class="ms-2 me-auto">
+          <div class="fw-bold">{{this.title}}</div>
+          <div >
+              {{this.content}}
+          </div>
         </div>
         
         <span class="badge bg-primary rounded-pill">{{this.date_created}}</span>
@@ -14,4 +15,3 @@
   {{/each}}
 </ol>
 
-<script src="/js/home.js"></script>
